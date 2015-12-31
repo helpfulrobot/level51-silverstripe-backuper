@@ -6,7 +6,8 @@
  */
 use Ifsnop\Mysqldump as IMysqldump;
 
-class BackupActionController extends Controller {
+class BackupActionController extends Controller
+{
     private static $allowed_actions = array('createBackup');
 
     private static $url_handlers = array(
@@ -18,13 +19,15 @@ class BackupActionController extends Controller {
      * @param $data
      * @param $form
      */
-    public function createBackup(SS_HTTPRequest $request) {
+    public function createBackup(SS_HTTPRequest $request)
+    {
         // Get DB name
         $db = defined('SS_DATABASE_PREFIX') ? SS_DATABASE_PREFIX : '';
-        if(isset($GLOBALS['database']))
+        if (isset($GLOBALS['database'])) {
             $db .= $GLOBALS['database'];
-        else if(isset($GLOBALS['databaseConfig']))
+        } elseif (isset($GLOBALS['databaseConfig'])) {
             $db .= $GLOBALS['databaseConfig']['database'];
+        }
         $db .= defined('SS_DATABASE_SUFFIX') ? SS_DATABASE_SUFFIX : '';
 
         // Generate a database dump
